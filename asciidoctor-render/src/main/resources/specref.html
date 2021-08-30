@@ -1,0 +1,46 @@
+<style>
+    .specref-bracket {
+        color: lightgray;
+    }
+    .specref-link {
+        color: gray;
+        text-decoration-style: dashed;
+    }
+    .specref-list {
+        display: none;
+        position: absolute;
+        background-color: #f1f1f1;
+        min-width: 160px;
+        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+        z-index: 1;
+    }
+    .specref-list a {
+        padding: 12px 16px;
+        display: block;
+    }
+    .specref-list a:hover {
+        background-color: #dddddd;
+    }
+</style>
+<script>
+    $(() => {
+        let shown = null;
+
+        $(document).click((event) => {
+            if (shown) {
+                $('#' + shown).css('display', 'none');
+            }
+
+            if($(event.target).is('.specref-link')) {
+                let linkId = event.target.id;
+                let listId = linkId.replace('link-', 'list-');
+                if (shown === listId) {
+                    shown = null;
+                } else {
+                    $("#" + listId).css("display", "block");
+                    shown = listId;
+                }
+            }
+        });
+    });
+</script>
